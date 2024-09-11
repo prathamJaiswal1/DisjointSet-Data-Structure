@@ -22,17 +22,16 @@ class DisjointSet{
    
    // size by union
     void Union(int u,int v){
-        int ult_u=ult_parent(u);
-        int ult_v=ult_parent(v);
-
-        if(ult_u == ult_v) return;
-        
-        if(size[ult_u] > size[ult_v]){
-            parent[v]=u;
-            size[u]+=size[v];
-        }else{
-            parent[u]=v;
-            size[v]+=size[u];
+        int ulp_u = ult_parent(u);
+        int ulp_v = ult_parent(v);
+        if (ulp_u == ulp_v) return;
+        if (size[ulp_u] < size[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v];
         }
     }
 };
